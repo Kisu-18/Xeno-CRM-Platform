@@ -1,0 +1,7 @@
+{
+  "rules": [
+    { "field": "totalSpend", "op": ">", "value": 10000 },
+    { "field": "visitCount", "op": "<", "value": 3 }
+  ],
+  "logic": "AND"
+}
