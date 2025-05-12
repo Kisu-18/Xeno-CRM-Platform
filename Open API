@@ -1,0 +1,17 @@
+// server/routes/ai.js
+const { Configuration, OpenAIApi } = require("openai");
+const express = require("express");
+const router = express.Router();
+
+const config = new Configuration({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAIApi(config);
+
+router.post("/translate", async (req, res) => {
+  const prompt = `Convert this into logical rules: ${req.body.text}`;
+  const response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: prompt }],
+  });
+
+  res.send({ rules: response.data.choices[0].message.content });
+});
